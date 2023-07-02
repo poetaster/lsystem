@@ -107,17 +107,27 @@ function turtleCanDo(command, lSystem) {
     if (!Number.isFinite(angle)) throw new Error('`rotate() needs one float argument');
 
     switch (command.name) {
-      case 'rotateX': return function() { lSystem.turtle.rotateX(angle) };
-      case 'rotateY': return function() { lSystem.turtle.rotateY(angle) };
+      case 'rotateX': return function() { 
+          lSystem.turtle.rotateX(angle) 
+          //console.log(angle);
+      };
+      case 'rotateY': return function() { 
+          lSystem.turtle.rotateY(angle) 
+          //console.log(angle);
+      };
     }
 
-    return function() { lSystem.turtle.rotateZ(angle) };
+    return function() { 
+        lSystem.turtle.rotateZ(angle) 
+        //console.log("angle " + angle);
+    };
   }
 
   if (command.name === 'draw') {
     let length = getLength(command.args[0], 'draw');
     return function() {
       lSystem.turtle.draw(length)
+       //console.log("draw " + length);
     }
   }
 
@@ -125,6 +135,7 @@ function turtleCanDo(command, lSystem) {
     let color = command.args[0];
     return function() {
       lSystem.turtle.setColor(color)
+       //console.log(color);
     }
   }
 
@@ -132,7 +143,10 @@ function turtleCanDo(command, lSystem) {
   if (command.name === 'pop') return function() {lSystem.turtle.pop()}
   if (command.name === 'move') {
     let length = getLength(command.args[0], 'move');
-    return function() {lSystem.turtle.move(length)}
+    return function() {
+        lSystem.turtle.move(length)
+        //console.log("move " + length);
+    }
   }
   if (command.name.match(/swapAngle/i)) {
     return function() {lSystem.turtle.swapAngle()}

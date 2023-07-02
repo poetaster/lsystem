@@ -4,6 +4,8 @@
       <div class='controls'>
         <a href="#" class='print-button' @click.prevent='toggleEdit'>{{ showEdit ? "Hide editor" : "Edit..."}}</a>
         <a href="#" class='try-another' @click.prevent='randomize'>Randomize</a>
+        <a href="#" class='sound-start' @click.prevent='soundOn'>| > |</a>
+        <a href="#" class='sound-stop' @click.prevent='soundOff'>| = | </a>
       </div>
       <div v-if='showEdit' class='editor-container'>
         <div class="section">
@@ -73,6 +75,9 @@
 import createScene from './createScene';
 import getCodeModel from './getCodeModel';
 import CodeEditor from './CodeEditor';
+//import { MetalSynth, Transport, Sequence } from 'tone';
+import * as Tone from 'tone';
+import getAudioModel from './instrument';
 
 export default {
   name: 'App',
@@ -89,6 +94,7 @@ export default {
   mounted() {
     this.scene = createScene(document.querySelector('#scene'));
     this.codeEditorModel = getCodeModel(this.scene);
+    this.audioModel = getAudioModel(this.scene);
   },
   beforeDestroy() {
     this.scene.dispose();
@@ -102,9 +108,18 @@ export default {
     },
     randomize() {
       this.codeEditorModel.randomize();
-    }
+    },
+    soundOn() {
+      Tone.start();
+      this.audioModel.congaPart.start(0);
+      this.audioModel.bellPart.start(0);
+      Tone.Transport.bpm.value = 115, 
+      Tone.Transport.start();
+    },
+    soundOff() {
+      Tone.Transport.stop();
+     }
   }
-
 }
 </script>
 
