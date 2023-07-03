@@ -110,17 +110,17 @@ function turtleCanDo(command, lSystem) {
     switch (command.name) {
       case 'rotateX': return function() { 
           lSystem.turtle.rotateX(angle) 
-          //console.log(angle);
+          //console.log("angle" + angle);
       };
       case 'rotateY': return function() { 
           lSystem.turtle.rotateY(angle) 
-          //console.log(angle);
+          //console.log("angle" + angle);
       };
     }
 
     return function() { 
         lSystem.turtle.rotateZ(angle) 
-        //console.log("angle " + angle);
+        console.log("angle " + angle);
     };
   }
 
@@ -128,7 +128,7 @@ function turtleCanDo(command, lSystem) {
     let length = getLength(command.args[0], 'draw');
     return function() {
       lSystem.turtle.draw(length)
-       //console.log("draw " + length);
+       console.log("draw " + length);
     }
   }
 
@@ -136,7 +136,7 @@ function turtleCanDo(command, lSystem) {
     let color = command.args[0];
     return function() {
       lSystem.turtle.setColor(color)
-       //console.log(color);
+       console.log(color);
     }
   }
 
@@ -146,7 +146,7 @@ function turtleCanDo(command, lSystem) {
     let length = getLength(command.args[0], 'move');
     return function() {
         lSystem.turtle.move(length)
-        //console.log("move " + length);
+        console.log("move " + length);
     }
   }
   if (command.name.match(/swapAngle/i)) {

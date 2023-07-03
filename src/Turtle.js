@@ -66,6 +66,18 @@ export default class Turtle {
     let y = p[1] + distance * n[1];
     let z = p[2] + distance * n[2];
     p[0] = x; p[1] = y; p[2] = z;
+
+    const result =  new Promise( (resolve,reject) => {
+        if (p[2] > 0 )
+            this.bell.triggerAttack(p[2]+50);
+
+        setTimeout(() => {
+           resolve("yes");
+         }, 400);
+    });
+    result.then( (result) =>  {
+    }).catch((reason) => {
+  });
   }
 
   draw(distance) {
@@ -85,9 +97,9 @@ export default class Turtle {
     const result =  new Promise( (resolve,reject) => {
         if (p[0] > 0 )
             //this.bell.triggerAttack("G4");
-            this.conga.triggerAttack(p[0]+100);
+            this.conga.triggerAttack(p[0]+50);
         if (p[0] < 0 )
-            this.conga.triggerAttack(p[1]+100);
+            this.conga.triggerAttack(p[1]+50);
         setTimeout(() => {
            resolve("yes");
          }, 400);
