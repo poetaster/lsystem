@@ -92,13 +92,15 @@ export default function createLScene(canvas) {
   function frame() {
     canDrawMore = false;
     lSystem.forEach(drawSystem);
-    if (canDrawMore) {
-      raf = requestAnimationFrame(frame);
-    }
-    if (disposeLater) {
+    setTimeout( () => {
+     if (canDrawMore) {
+       raf = requestAnimationFrame(frame);
+     }
+     if (disposeLater) {
       disposeLater.forEach(l => l.dispose())
       disposeLater = null;
-    }
+     }
+    }, 200);
   }
 
   function drawSystem(system) {

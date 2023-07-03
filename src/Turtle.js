@@ -1,5 +1,6 @@
 import LineCollection from './LineCollection';
 import tinycolor from 'tinycolor2';
+import * as Tone from 'tone';
 
 export default class Turtle {
   constructor(scene, options = {}) {
@@ -16,6 +17,27 @@ export default class Turtle {
     this.scene.appendChild(this.lines);
     this.stack = [];
     this.invertZYAngle = false;
+    this.conga = new Tone.MembraneSynth({
+			pitchDecay: 0.008,
+			octaves: 2,
+			envelope: {
+				attack: 0.0006,
+				decay: 0.5,
+				sustain: 0,
+			}
+    });
+    this.conga.toDestination();
+    this.bell = new Tone.MetalSynth({
+            harmonicity: 12,           
+            resonance: 800,            
+            modulationIndex: 20,       
+            envelope: { decay: 0.3, },                         
+            volume: -15
+    });
+    this.bell.toDestination();
+
+    Tone.start();
+
   }
 
   push() {
@@ -59,7 +81,23 @@ export default class Turtle {
     });
 
     p[0] = x; p[1] = y; p[2] = z;
-    this.scene.renderFrame();
+    //console.log(p);
+    const result =  new Promise( (resolve,reject) => {
+        if (p[0] > 0 )
+            //this.bell.triggerAttack("G4");
+            this.conga.triggerAttack(p[0]+100);
+        if (p[0] < 0 )
+            this.conga.triggerAttack(p[1]+100);
+        setTimeout(() => {
+           resolve("yes");
+         }, 400);
+    });
+    result.then( (result) =>  {
+      //console.log(result); // "yes"
+      this.scene.renderFrame() ;
+    }).catch((reason) => {
+       //console.log( reason );
+  });
   }
 
   setColor(newColorValue) {

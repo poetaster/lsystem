@@ -18,7 +18,7 @@ export default class LSystem {
     const depth = Number.isFinite(systemSettings.depth) ? systemSettings.depth : 5;
     let start = systemSettings.start;
     if (start === undefined) start = Object.keys(this.rules)[0];
-    if (start === undefined) throw new Error('System does not have neither rewrite rules nor start state');
+    if (start === undefined) throw new Error('System lacks rewrite rules and start state');
     this.start = start;
     this.depth = depth;
     this.simulate(); // TODO: Might exhaust system resources
@@ -97,6 +97,7 @@ function compileActions(systemSettings, lSystem) {
       throw new Error("Turtle does not know how to do '" + value + "'");
     }
   });
+
 
   return actions;
 }
