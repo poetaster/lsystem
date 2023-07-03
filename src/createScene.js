@@ -100,7 +100,7 @@ export default function createLScene(canvas) {
       disposeLater.forEach(l => l.dispose())
       disposeLater = null;
      }
-    }, 200);
+    }, 150);
   }
 
   function drawSystem(system) {

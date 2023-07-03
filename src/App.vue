@@ -111,8 +111,8 @@ export default {
     },
     soundOn() {
       Tone.start();
-      this.audioModel.congaPart.start(0);
-      this.audioModel.bellPart.start(0);
+      //this.audioModel.congaPart.start(0);
+      //this.audioModel.bellPart.start(0);
       Tone.Transport.bpm.value = 115, 
       Tone.Transport.start();
     },

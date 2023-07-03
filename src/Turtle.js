@@ -69,11 +69,12 @@ export default class Turtle {
 
     const result =  new Promise( (resolve,reject) => {
         if (p[2] > 0 )
-            this.bell.triggerAttack(p[2]+50);
+            this.bell.triggerAttack(p[2]+50, Tone.now());
 
+        //    this.bell.triggerAttack(p[2]+50, Tone.now(), Math.random()*0.5 + 0.5);
         setTimeout(() => {
            resolve("yes");
-         }, 400);
+         }, 100);
     });
     result.then( (result) =>  {
     }).catch((reason) => {
@@ -96,13 +97,12 @@ export default class Turtle {
     //console.log(p);
     const result =  new Promise( (resolve,reject) => {
         if (p[0] > 0 )
-            //this.bell.triggerAttack("G4");
-            this.conga.triggerAttack(p[0]+50);
+            this.conga.triggerAttack(Math.abs(p[0]+50), Tone.now() );
         if (p[0] < 0 )
-            this.conga.triggerAttack(p[1]+50);
+            this.conga.triggerAttack(Math.abs(p[1]+50), Tone.now() );
         setTimeout(() => {
            resolve("yes");
-         }, 400);
+         }, 100);
     });
     result.then( (result) =>  {
       //console.log(result); // "yes"

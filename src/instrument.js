@@ -6,7 +6,7 @@ export default function getAudioModel(scene) {
 			octaves: 2,
 			envelope: {
 				attack: 0.0006,
-				decay: 0.5,
+				decay: 0.3,
 				sustain: 0
 			}
     });
@@ -20,7 +20,7 @@ export default function getAudioModel(scene) {
             harmonicity: 12,           
             resonance: 800,            
             modulationIndex: 20,       
-            envelope: { decay: 0.4, },                         
+            envelope: { decay: 0.3, },                         
             volume: -15
     });
 
