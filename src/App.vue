@@ -75,7 +75,7 @@
 import createScene from './createScene';
 import getCodeModel from './getCodeModel';
 import CodeEditor from './CodeEditor';
-//import { MetalSynth, Transport, Sequence } from 'tone';
+
 import * as Tone from 'tone';
 import getAudioModel from './instrument';
 
@@ -92,9 +92,9 @@ export default {
     }
   },
   mounted() {
-    this.scene = createScene(document.querySelector('#scene'));
-    this.codeEditorModel = getCodeModel(this.scene);
     this.audioModel = getAudioModel(this.scene);
+    this.scene = createScene(document.querySelector('#scene'), this.audioModel);
+    this.codeEditorModel = getCodeModel(this.scene);
   },
   beforeDestroy() {
     this.scene.dispose();

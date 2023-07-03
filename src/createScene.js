@@ -1,7 +1,10 @@
 import {createScene, createGuide, toSVG} from 'w-gl';
 import LSystem from './LSystem';
+import * as Tone from 'tone';
 
-export default function createLScene(canvas) {
+export default function createLScene(canvas, audioModel) {
+  let aModel = audioModel;
+  let loop = new Tone.Sequence()
   let scene = createScene(canvas);
   let guide = createGuide(scene, {
     lineColor: 0x0d3f71ff
@@ -91,16 +94,14 @@ export default function createLScene(canvas) {
 
   function frame() {
     canDrawMore = false;
-    lSystem.forEach(drawSystem);
-    setTimeout( () => {
-     if (canDrawMore) {
-       raf = requestAnimationFrame(frame);
-     }
-     if (disposeLater) {
-      disposeLater.forEach(l => l.dispose())
-      disposeLater = null;
-     }
-    }, 200);
+      lSystem.forEach(drawSystem);
+      if (canDrawMore) {
+            raf = requestAnimationFrame(frame);
+      }
+      if (disposeLater) {
+            disposeLater.forEach(l => l.dispose())
+            disposeLater = null;
+      }
   }
 
   function drawSystem(system) {
